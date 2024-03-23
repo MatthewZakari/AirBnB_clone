@@ -5,6 +5,7 @@ FileStorage Module
 import json
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """
     FileStorage class
@@ -29,13 +30,14 @@ class FileStorage:
         """
         Serializes __objects to the JSON file (path: __file_path)
         """
-        serializable = {key: value.to_dict() for key, value in self.__objects.items()}
+        serializable = {key: value.to_dict()
+                        for key, value in self.__objects.items()}
         with open(self.__file_path, 'w') as file:
             json.dump(serializable, file)
 
     def reload(self):
         """
-        Deserializes the JSON file to __objects (only if the JSON file (__file_path) exists)
+        Deserializes JSON file to __objects (only if (__file_path) exists)
         """
         try:
             with open(self.__file_path, 'r') as file:
@@ -45,6 +47,7 @@ class FileStorage:
                     self.__objects[key] = eval(class_name)(**value)
         except FileNotFoundError:
             pass
+
 
 """Instantiate the storage object at the module level"""
 storage = FileStorage()
