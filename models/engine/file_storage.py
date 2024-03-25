@@ -46,9 +46,4 @@ class FileStorage:
                     class_name, obj_id = key.split('.')
                     self.__objects[key] = eval(class_name)(**value)
         except FileNotFoundError:
-            pass
-
-
-"""Instantiate the storage object at the module level"""
-storage = FileStorage()
-storage.reload()
+            return
